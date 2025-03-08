@@ -1,6 +1,15 @@
 # Problem 2889: Reshape Data: Pivot
 # Difficulty: Easy
 
+# DataFrame `weather`:
+# +-------------+--------+
+# | Column Name | Type   |
+# +-------------+--------+
+# | city        | object |
+# | month       | object |
+# | temperature | int    |
+# +-------------+--------+
+
 # Problem Statement:
 # Write a function to pivot the `weather` DataFrame so that each row represents 
 # temperatures for a specific month, and each city is a separate column.

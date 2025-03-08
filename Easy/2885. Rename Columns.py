@@ -1,6 +1,16 @@
 # Problem 2885: Rename Columns
 # Difficulty: Easy
 
+# DataFrame `students`:
+# +-------------+--------+
+# | Column Name | Type   |
+# +-------------+--------+
+# | id          | int    |
+# | first       | object |
+# | last        | object |
+# | age         | int    |
+# +-------------+--------+
+
 # Problem Statement:
 # Write a function to rename the columns in the `students` DataFrame as follows:
 # - `id` → `student_id`

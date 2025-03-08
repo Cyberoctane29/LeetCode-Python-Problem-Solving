@@ -1,6 +1,16 @@
 # Problem 2886: Change Data Type
 # Difficulty: Easy
 
+# DataFrame `students`:
+# +-------------+--------+
+# | Column Name | Type   |
+# +-------------+--------+
+# | student_id  | int    |
+# | name        | object |
+# | age         | int    |
+# | grade       | float  |
+# +-------------+--------+
+
 # Problem Statement:
 # Write a function to convert the `grade` column from float to integer in the `students` DataFrame.
 

@@ -1,6 +1,15 @@
 # Problem 2887: Fill Missing Data
 # Difficulty: Easy
 
+# DataFrame `products`:
+# +-------------+--------+
+# | Column Name | Type   |
+# +-------------+--------+
+# | name        | object |
+# | quantity    | int    |
+# | price       | int    |
+# +-------------+--------+
+
 # Problem Statement:
 # Write a function to fill missing values in the `quantity` column with 0 in the `products` DataFrame.
 

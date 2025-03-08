@@ -1,6 +1,15 @@
 # Problem 2883: Drop Missing Data
 # Difficulty: Easy
 
+# DataFrame `students`:
+# +-------------+--------+
+# | Column Name | Type   |
+# +-------------+--------+
+# | student_id  | int    |
+# | name        | object |
+# | age         | int    |
+# +-------------+--------+
+
 # Problem Statement:
 # Write a function to remove rows from the `students` DataFrame where the `name` column has missing values.
 

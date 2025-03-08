@@ -1,6 +1,17 @@
 # Problem 2878: Get the Size of a DataFrame
 # Difficulty: Easy
 
+# DataFrame `players`:
+# +-------------+--------+
+# | Column Name | Type   |
+# +-------------+--------+
+# | player_id   | int    |
+# | name        | object |
+# | age         | int    |
+# | position    | object |
+# | ...         | ...    |
+# +-------------+--------+
+
 # Problem Statement:
 # Write a function to calculate and return the number of rows and columns of the given DataFrame `players`.
 # The result should be returned as a list in the format: [number of rows, number of columns].

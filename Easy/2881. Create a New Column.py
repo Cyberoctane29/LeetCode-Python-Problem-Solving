@@ -1,6 +1,14 @@
 # Problem 2881: Create a New Column
 # Difficulty: Easy
 
+# DataFrame `employees`:
+# +-------------+--------+
+# | Column Name | Type   |
+# +-------------+--------+
+# | name        | object |
+# | salary      | int    |
+# +-------------+--------+
+
 # Problem Statement:
 # Write a function to create a new column `bonus` in the DataFrame.
 # The `bonus` column should contain values that are double the `salary` column.

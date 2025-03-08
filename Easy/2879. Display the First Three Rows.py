@@ -1,6 +1,16 @@
 # Problem 2879: Display the First Three Rows
 # Difficulty: Easy
 
+# DataFrame `employees`:
+# +-------------+--------+
+# | Column Name | Type   |
+# +-------------+--------+
+# | employee_id | int    |
+# | name        | object |
+# | department  | object |
+# | salary      | int    |
+# +-------------+--------+
+
 # Problem Statement:
 # Write a function to return the first three rows of the given DataFrame `employees`.
 

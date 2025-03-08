@@ -1,6 +1,15 @@
 # Problem 2880: Select Data
 # Difficulty: Easy
 
+# DataFrame `students`:
+# +-------------+--------+
+# | Column Name | Type   |
+# +-------------+--------+
+# | student_id  | int    |
+# | name        | object |
+# | age         | int    |
+# +-------------+--------+
+
 # Problem Statement:
 # Write a function to return the name and age of the student with student_id = 101.
 

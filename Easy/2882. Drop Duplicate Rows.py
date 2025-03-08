@@ -1,6 +1,15 @@
 # Problem 2882: Drop Duplicate Rows
 # Difficulty: Easy
 
+# DataFrame `customers`:
+# +-------------+--------+
+# | Column Name | Type   |
+# +-------------+--------+
+# | customer_id | int    |
+# | name        | object |
+# | email       | object |
+# +-------------+--------+
+
 # Problem Statement:
 # Write a function to remove duplicate rows from the `customers` DataFrame based on the `email` column.
 # Keep only the first occurrence of each unique email.

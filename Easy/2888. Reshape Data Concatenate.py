@@ -1,6 +1,24 @@
 # Problem 2888: Reshape Data: Concatenate
 # Difficulty: Easy
 
+# DataFrame `df1`:
+# +-------------+--------+
+# | Column Name | Type   |
+# +-------------+--------+
+# | student_id  | int    |
+# | name        | object |
+# | age         | int    |
+# +-------------+--------+
+
+# DataFrame `df2`:
+# +-------------+--------+
+# | Column Name | Type   |
+# +-------------+--------+
+# | student_id  | int    |
+# | name        | object |
+# | age         | int    |
+# +-------------+--------+
+
 # Problem Statement:
 # Write a function to concatenate two DataFrames, `df1` and `df2`, vertically.
 

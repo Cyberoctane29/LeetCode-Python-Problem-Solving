@@ -1,6 +1,14 @@
 # Problem 2884: Modify Columns
 # Difficulty: Easy
 
+# DataFrame `employees`:
+# +-------------+--------+
+# | Column Name | Type   |
+# +-------------+--------+
+# | name        | object |
+# | salary      | int    |
+# +-------------+--------+
+
 # Problem Statement:
 # Write a function to modify the `salary` column in the `employees` DataFrame by multiplying each value by 2.
 
