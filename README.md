@@ -27,16 +27,16 @@ This collection serves as a structured reference for:
 ## Repository Structure
 
 ```python
--- LeetCode-Python-Solutions/
--- │── Easy/
--- │   ├── problem_name_1.py
--- │   ├── problem_name_2.py
--- │── Medium/
--- │   ├── problem_name_3.py
--- │   ├── problem_name_4.py
--- │── Hard/
--- │   ├── problem_name_5.py
--- │   ├── problem_name_6.py
+# LeetCode-Python-Solutions/
+# │── Easy/
+# │   ├── problem_name_1.py
+# │   ├── problem_name_2.py
+# │── Medium/
+# │   ├── problem_name_3.py
+# │   ├── problem_name_4.py
+# │── Hard/
+# │   ├── problem_name_5.py
+# │   ├── problem_name_6.py
 ```
 ## Example Solution Format
 
