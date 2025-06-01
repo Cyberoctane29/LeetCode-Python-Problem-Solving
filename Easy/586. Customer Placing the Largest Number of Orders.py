@@ -12,22 +12,23 @@
 # This table contains information about the order ID and the customer ID.
 
 # Problem Statement:
-# Write a function to find the `customer_number` for the customer who has placed the largest number of orders.
-# It is guaranteed that exactly one customer has placed more orders than any other.
+# Write a function to find the customer_number for the customer who has placed the largest number of orders.
+# The test cases guarantee exactly one customer has placed more orders than any other.
 
 import pandas as pd
 
 def largest_orders(orders: pd.DataFrame) -> pd.DataFrame:
     if orders.empty:
-        return pd.DataFrame(columns=['customer_number'])
+        return pd.DataFrame({'customer_number': []})
+    # I count the occurrences of each customer_number, then find the one with the highest count.
     return pd.DataFrame({'customer_number': [orders['customer_number'].value_counts().idxmax()]})
 
 # Intuition:
-# - I need to count how many times each `customer_number` appears in the `orders` table.
-# - The customer with the highest count is the one with the most orders.
+# - I need to find the customer who has placed the most orders.
+# - Counting orders per customer and selecting the max count will give me the desired customer.
 
 # Explanation:
-# - I use `value_counts()` to count the occurrences of each `customer_number`.
-# - I retrieve the customer with the highest order count using `idxmax()`.
-# - I return the result in a DataFrame with the column `customer_number`.
-# - I also handle the edge case where the `orders` table might be empty, returning an empty DataFrame with the appropriate column.
+# - I use `value_counts()` on 'customer_number' to get the frequency of orders per customer.
+# - I use `idxmax()` to find the customer with the highest order count.
+# - If the orders DataFrame is empty, I return an empty DataFrame.
+# - Otherwise, I return the customer_number in a DataFrame as specified.
