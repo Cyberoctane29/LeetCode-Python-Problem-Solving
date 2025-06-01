@@ -1,4 +1,4 @@
-# 💻 LeetCode Python Solutions
+# 💻 LeetCode Python Problem Solving
 
 Welcome to my **LeetCode Python Solutions** repository!
 
