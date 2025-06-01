@@ -1,8 +1,8 @@
-# 💻 LeetCode Python Solutions
+# 💻 LeetCode Python Problem Solving
 
-Welcome to my **LeetCode Python Solutions** repository!
+Welcome to my **LeetCode Python Problem Solving** repository!
 
-This repository contains my Python solutions to LeetCode problems, systematically categorized by difficulty level:
+This repository contains my Python problem solving approach and solutions to LeetCode problems, systematically categorized by difficulty level:
 
 - **Easy**
 - **Medium**
