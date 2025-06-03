@@ -20,18 +20,18 @@
 import pandas as pd
 
 def biggest_single_number(my_numbers: pd.DataFrame) -> pd.DataFrame:
-    # count occurrences of each number
+    # I count occurrences of each number
     temp_df = my_numbers['num'].value_counts().reset_index()
-    temp_df.columns = ['num', 'count']  # rename columns for clarity
+    temp_df.columns = ['num', 'count']  # I rename columns for clarity
     
-    # filter for numbers that appear exactly once (single numbers)
+    # I filter for numbers that appear exactly once (single numbers)
     filtered_df = temp_df.loc[temp_df['count'] == 1, ['num', 'count']]
     
-    # if no single numbers exist, return DataFrame with null
+    # If no single numbers exist, I return a DataFrame with null
     if filtered_df.empty:
         return pd.DataFrame([{'num': None}])
     
-    # return the largest single number as a DataFrame
+    # I return the largest single number as a DataFrame
     return pd.DataFrame([{'num': filtered_df['num'].max()}])
 
 # Intuition:
