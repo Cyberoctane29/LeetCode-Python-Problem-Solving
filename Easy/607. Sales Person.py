@@ -59,10 +59,10 @@ def sales_person(sales_person: pd.DataFrame, company: pd.DataFrame, orders: pd.D
     red_sales_ids = merged_all.loc[merged_all['name_company'] == 'RED', 'sales_id']
 
     # Finally, I select salespersons who never sold to "RED"
-    result = merged_all.loc[~merged_all['sales_id'].isin(red_sales_ids), ['name_sales']]
+    result = merged_all.loc[~merged_all['sales_id'].isin(red_sales_ids), ['name_emp']]
 
     # I rename the column, remove duplicates, and reset the index before returning
-    return result.rename(columns={'name_sales': 'name'}).drop_duplicates().reset_index(drop=True)
+    return result.rename(columns={'name_emp': 'name'}).drop_duplicates().reset_index(drop=True)
 
 # Intuition:
 # - I want to exclude salespersons with orders linked to the company "RED".
