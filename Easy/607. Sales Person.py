@@ -49,20 +49,20 @@
 import pandas as pd
 
 def sales_person(sales_person: pd.DataFrame, company: pd.DataFrame, orders: pd.DataFrame) -> pd.DataFrame:
-    # I merge Orders with Company to get company names for each order
-    merged_orders = pd.merge(orders, company, how='left', on='com_id')
-    
-    # I merge SalesPerson with merged_orders to associate salespersons with company orders
-    merged = sales_person.merge(merged_orders, how='left', on='sales_id', suffixes=('_emp', '_comp'))
-    
-    # I find salespersons who have orders with company named 'RED'
-    sales_with_red = merged.loc[merged['name_comp'] == 'RED', 'sales_id']
-    
-    # I select salespersons who do NOT have any orders related to 'RED'
-    result = merged.loc[~merged['sales_id'].isin(sales_with_red), ['name_emp']].drop_duplicates()
-    
-    # I rename column to 'name' as expected
-    return result.rename(columns={'name_emp': 'name'}).reset_index(drop=True)
+    # I start by merging orders with company to get company names on each order
+    merged_orders = orders.merge(company, how='left', on='com_id')
+
+    # Next, I merge salespersons with the orders to associate salespersons with companies they sold to
+    merged_all = sales_person.merge(merged_orders, how='left', on='sales_id', suffixes=('_sales', '_company'))
+
+    # I identify salespersons who have sold to "RED"
+    red_sales_ids = merged_all.loc[merged_all['name_company'] == 'RED', 'sales_id']
+
+    # Finally, I select salespersons who never sold to "RED"
+    result = merged_all.loc[~merged_all['sales_id'].isin(red_sales_ids), ['name_sales']]
+
+    # I rename the column, remove duplicates, and reset the index before returning
+    return result.rename(columns={'name_sales': 'name'}).drop_duplicates().reset_index(drop=True)
 
 # Intuition:
 # - I want to exclude salespersons with orders linked to the company "RED".
