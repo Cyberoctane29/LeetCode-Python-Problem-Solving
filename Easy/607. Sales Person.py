@@ -53,10 +53,10 @@ def sales_person(sales_person: pd.DataFrame, company: pd.DataFrame, orders: pd.D
     merged_orders = orders.merge(company, how='left', on='com_id')
 
     # Next, I merge salespersons with the orders to associate salespersons with companies they sold to
-    merged_all = sales_person.merge(merged_orders, how='left', on='sales_id', suffixes=('_emp', '_company'))
+    merged_all = sales_person.merge(merged_orders, how='left', on='sales_id', suffixes=('_emp', '_comp'))
 
     # I identify salespersons who have sold to "RED"
-    red_sales_ids = merged_all.loc[merged_all['name_company'] == 'RED', 'sales_id']
+    red_sales_ids = merged_all.loc[merged_all['name_comp'] == 'RED', 'sales_id']
 
     # Finally, I select salespersons who never sold to "RED"
     result = merged_all.loc[~merged_all['sales_id'].isin(red_sales_ids), ['name_emp']]
