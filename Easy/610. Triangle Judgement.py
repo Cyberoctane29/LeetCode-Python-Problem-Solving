@@ -21,20 +21,20 @@
 import pandas as pd
 
 def triangle_judgement(triangle: pd.DataFrame) -> pd.DataFrame:
-    results = []  # list to store 'Yes' or 'No' for each row
+    results = []  # I store 'Yes' or 'No' for each row here
     
-    # iterate through each row as (x, y, z)
+    # I iterate through each row as (x, y, z)
     for x, y, z in triangle.to_numpy():
-        # apply triangle inequality theorem check
+        # I apply the triangle inequality theorem check
         if (x + y > z) & (y + z > x) & (x + z > y):
-            results.append('Yes')  # if all conditions hold, it's a triangle
+            results.append('Yes')  # If all conditions hold, I mark it as a triangle
         else:
-            results.append('No')  # otherwise, it's not a triangle
+            results.append('No')  # Otherwise, I mark it as not a triangle
     
-    # assign the results list as a new column 'triangle' to the dataframe
+    # I assign the results list as a new column 'triangle' to the dataframe
     triangle['triangle'] = results
     
-    # return the updated dataframe
+    # I return the updated dataframe
     return triangle
 
 # Intuition:

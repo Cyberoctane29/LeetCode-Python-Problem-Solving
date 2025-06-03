@@ -49,19 +49,19 @@
 import pandas as pd
 
 def sales_person(sales_person: pd.DataFrame, company: pd.DataFrame, orders: pd.DataFrame) -> pd.DataFrame:
-    # I start by merging orders with company to get company names on each order
+    # I start by merging orders with company to get company names for each order
     merged_df1 = orders.merge(company, how='left', on='com_id')
 
-    # Next, I merge salespersons with the orders to associate salespersons with companies they sold to
+    # Then, I merge salespersons with the orders to link salespersons to the companies they sold to
     merged_df2 = sales_person.merge(merged_df1, how='left', on='sales_id', suffixes=('_emp', '_comp'))
 
-    # I identify salespersons who have sold to "RED"
+    # I identify salespersons who have sold to the company named "RED"
     red_sales_ids = merged_df2.loc[merged_df2['name_comp'] == 'RED', 'sales_id']
 
-    # Finally, I select salespersons who never sold to "RED"
+    # I filter to select salespersons who never sold to "RED"
     result_df = merged_df2.loc[~merged_df2['sales_id'].isin(red_sales_ids), ['name_emp']]
 
-    # I rename the column, remove duplicates, and reset the index before returning
+    # I rename the column, remove duplicates, and reset the index before returning the final result
     return result_df.rename(columns={'name_emp': 'name'}).drop_duplicates().reset_index(drop=True)
 
 # Intuition:
