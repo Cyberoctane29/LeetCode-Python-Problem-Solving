@@ -29,10 +29,10 @@ def biggest_single_number(my_numbers: pd.DataFrame) -> pd.DataFrame:
     
     # If no single numbers exist, I return a DataFrame with null
     if filtered_df.empty:
-        return pd.DataFrame([{'num': None}])
+        return pd.DataFrame({'num':[None]})
     
     # I return the largest single number as a DataFrame
-    return pd.DataFrame([{'num': filtered_df['num'].max()}])
+    return pd.DataFrame({'num': [filtered_df['num'].max()]})
 
 # Intuition:
 # - I need to find numbers that appear exactly once in the dataset.
