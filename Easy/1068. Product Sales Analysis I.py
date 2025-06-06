@@ -36,16 +36,14 @@ import pandas as pd
 
 def sales_analysis(sales: pd.DataFrame, product: pd.DataFrame) -> pd.DataFrame:
     # I merge the Sales and Product tables on 'product_id' using a left join to retain all sales records
-    merged_df = sales.merge(product, how='left', on='product_id')
-    # I select only the required columns: product_name, year, and price for the final result
-    return merged_df[['product_name','year','price']]
+    return sales.merge(product, how='left', on='product_id')[['product_name','year','price']]
 
 # Intuition for Solution:
-# - I need to combine product details with sales data so that I can access product names for each sale.
-# - I merge the Sales and Product tables on the common 'product_id' column to align each sale with its product name.
-# - I retain all sales records using a left join and then pick only the relevant columns for the final result.
+# - I need to associate each sale record with its product name.
+# - I merge the two tables on the 'product_id' column using a left join to keep all sales records.
+# - I select only the product_name, year, and price columns for the final result as required.
 
 # Explanation for Solution:
-# - I start by merging the Sales and Product tables on 'product_id' with a left join to ensure no sales record is lost.
-# - I select only the product_name, year, and price columns since the problem statement requires these three details.
-# - I return the resulting DataFrame containing the required information for each sale record.
+# - I perform a left join merge on 'product_id' so that each sale record from the Sales table gets matched with the corresponding product name from the Product table.
+# - I filter the merged DataFrame to retain only the product_name, year, and price columns.
+# - I return this final DataFrame containing the desired details for each sale.
