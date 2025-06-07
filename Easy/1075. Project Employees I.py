@@ -28,11 +28,15 @@
 # The average should be rounded to 2 decimal places.
 # Return the result with columns 'project_id' and 'average_years'.
 
+
 # Solution 1
 
 import pandas as pd
 
 def project_employees_i(project: pd.DataFrame, employee: pd.DataFrame) -> pd.DataFrame:
+    # I merge the project and employee tables on 'employee_id' to bring in experience years
+    # Then I group by 'project_id' and compute the mean of 'experience_years' using named aggregation
+    # Finally, I return a DataFrame with 'project_id' and 'average_years' (unrounded)
     return (
         project
         .merge(employee, how='left', on='employee_id')[['project_id', 'experience_years']]
@@ -52,12 +56,15 @@ def project_employees_i(project: pd.DataFrame, employee: pd.DataFrame) -> pd.Dat
 # - Using `.agg()` with named aggregation returns the average experience in a clean column called 'average_years'.
 # - The average is not rounded here, so it may contain many decimal places.
 
-
 # Solution 2
 
 import pandas as pd
 
 def project_employees_i(project: pd.DataFrame, employee: pd.DataFrame) -> pd.DataFrame:
+    # I merge the project and employee tables on 'employee_id' to bring in experience years
+    # Then I group by 'project_id' and directly compute the mean of 'experience_years'
+    # I reset the index and name the resulting column 'average_years'
+    # Finally, I round the average values to 2 decimal places
     return (
         project
         .merge(employee, how='left', on='employee_id')[['project_id', 'experience_years']]

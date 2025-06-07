@@ -33,7 +33,7 @@ def not_boring_movies(cinema: pd.DataFrame) -> pd.DataFrame:
 # - I use boolean filtering to achieve this directly with Pandas' `loc`.
 # - I finally sort the result by rating in descending order.
 
-# Explanation for Solution 1:
+# Explanation for Solution 1:s
 # - I apply a boolean mask to filter rows with odd ids and non-'boring' descriptions.
 # - I then sort the filtered result by rating using `sort_values()` in descending order.
 
