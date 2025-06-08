@@ -13,7 +13,7 @@
 # The month values are from ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'].
 
 # Problem Statement:
-# Write a function to reformat the table so that each row represents a department id,
+# I need to reformat the table so each row represents a department id,
 # and each month becomes a separate column holding its revenue.
 
 # Solution
@@ -21,32 +21,32 @@
 import pandas as pd
 
 def reformat_table(department: pd.DataFrame) -> pd.DataFrame:
-    # Define the correct chronological month order
+    # I define the correct chronological month order to preserve it in the final output
     month_order = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
                    'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
-    # Pivot the table so months become columns, revenue becomes values
+    # I pivot the table so that each month becomes a separate column and the revenue values fill the cells
     result_df = department.pivot(index='id', columns='month', values='revenue')
     
-    # Reorder the columns to match month_order
+    # I reorder the columns to match the correct month order
     result_df = result_df.reindex(columns=month_order)
     
-    # Rename columns to match the required format
+    # I rename the columns by adding '_Revenue' to each month to match the expected format
     result_df.columns = [f'{month}_Revenue' for month in result_df.columns]
     
-    # Reset index to turn 'id' back into a regular column
+    # Finally, I reset the index so that 'id' turns back into a regular column instead of an index
     return result_df.reset_index()
 
 # Intuition:
-# - The problem requires reshaping the table from a long format, where each row represents a department-month revenue,
-#   into a wide format, where each department has one row and a revenue column for each month.
-# - I use the pivot function to turn 'month' values into columns, with 'revenue' as their values.
-# - To maintain chronological order, I reorder the columns based on a predefined month sequence.
-# - Lastly, I rename the columns to follow the required 'Month_Revenue' format and reset the index.
+# I’m asked to reshape the table from a long format, where each row represents a department’s revenue in a month, 
+# into a wide format, where each department has one row and a revenue column for every month.
+# To achieve this, I use the pivot function to transform 'month' values into columns.
+# Then, I reorder the columns to follow the correct calendar sequence.
+# After that, I rename the columns to include '_Revenue' and reset the index to make 'id' a regular column.
 
 # Explanation:
-# - The pivot operation restructures the DataFrame so that 'id' becomes the index, 'month' values become columns,
-#   and 'revenue' fills the corresponding cells.
-# - Since pivot doesn’t guarantee the desired month order, I explicitly reorder the columns with reindex.
-# - I rename the month columns by appending '_Revenue' to each month name to match the expected output format.
-# - Finally, resetting the index converts 'id' from an index back into a regular column.
+# First, I use pivot to restructure the DataFrame so that 'id' becomes the index, 'month' values become columns,
+# and 'revenue' fills in the appropriate cells.
+# Since the pivot result might not maintain the desired month order, I reorder the columns using reindex.
+# Next, I rename all month columns by appending '_Revenue' to each one to match the expected naming convention.
+# Lastly, I reset the index so that 'id' moves from the index position back into a regular column.

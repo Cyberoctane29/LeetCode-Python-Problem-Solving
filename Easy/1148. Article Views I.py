@@ -23,8 +23,14 @@
 import pandas as pd
 
 def article_views(views: pd.DataFrame) -> pd.DataFrame:
+    # I start by filtering rows where the author viewed their own article
     temp = views.loc[views['author_id'] == views['viewer_id'], ['author_id']]
+    
+    # Then I get the unique author IDs from this filtered data
+    # I convert them into a DataFrame with the required column name 'id'
+    # Finally, I sort the IDs in ascending order to match the expected output
     answer = pd.DataFrame(temp['author_id'].unique(), columns=['id']).sort_values(by='id')
+    
     return answer
 
 # Intuition:
