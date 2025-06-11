@@ -54,13 +54,13 @@ def students_and_examinations(students: pd.DataFrame, subjects: pd.DataFrame, ex
     return result_df
 
 # Intuition:
-# The task requires creating a record for every possible student-subject combination.
-# Then, for each combination, count how many times the student attended the exam for that subject.
-# Any missing attendance records should be treated as zero.
+# I need to create a record for every possible student-subject combination.
+# Then, for each combination, I need to count how many times the student attended the exam for that subject.
+# If a student didn’t attend a particular exam, I should treat the attendance count as zero.
 
 # Explanation:
-# First, a cross join between Students and Subjects creates all possible student-subject pairs.
-# Next, the Examinations table is grouped by student_id and subject_name to count the number of attendance records for each pair.
-# The counts are then merged with the full list of student-subject pairs.
-# Missing values in attendance counts are filled with zero since not every student attended every exam.
-# Finally, the result is sorted by student_id and subject_name before being returned.
+# I start by performing a cross join between the Students and Subjects tables to create all possible student-subject pairs.
+# Next, I group the Examinations table by student_id and subject_name and count the number of attendance records for each pair.
+# I merge these attendance counts with the complete list of student-subject pairs to ensure every possible combination is represented.
+# I replace any missing attendance counts with zero since not every student attended every exam.
+# Finally, I sort the result by student_id and subject_name before returning it.
