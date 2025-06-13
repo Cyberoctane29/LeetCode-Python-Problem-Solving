@@ -27,13 +27,13 @@ def categorize_products(activities: pd.DataFrame) -> pd.DataFrame:
     # I group the data by 'sell_date', then calculate:
     # 1. The number of unique products sold on each date using nunique()
     # 2. The concatenated, lexicographically sorted list of unique product names sold on each date
-    temp_df = activities.groupby(['sell_date'], as_index=False).agg(
+    result_df = activities.groupby(['sell_date'], as_index=False).agg(
         num_sold=('product', 'nunique'),
         products=('product', lambda x: ','.join(sorted(x.unique())))
     )
 
     # I return the final result
-    return temp_df
+    return result_df
 
 # Intuition:
 # I need to determine for each date how many different products were sold and list their names in sorted order.
