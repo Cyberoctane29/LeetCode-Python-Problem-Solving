@@ -73,4 +73,3 @@ def find_books_with_no_available_copies(library_books: pd.DataFrame, borrowing_r
 # Then, I compute the remaining available copies by subtracting current borrowers.
 # I filter for rows where remaining copies are zero, meaning no copies are available.
 # Finally, I sort the result by current_borrowers in descending order, and by title alphabetically, and drop unneeded columns.
-```
