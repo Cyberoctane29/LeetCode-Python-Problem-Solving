@@ -21,12 +21,12 @@ import pandas as pd
 
 def second_highest_salary(employee: pd.DataFrame) -> pd.DataFrame:
     # I extract the unique salary values and sort them in descending order
-    result_df = pd.Series(employee['salary'].unique()).sort_values(ascending=False)
+    result_series = pd.Series(employee['salary'].unique()).sort_values(ascending=False)
     
     # I check if there is more than one distinct salary
-    if len(result_df) > 1:
+    if len(result_series) > 1:
         # If so, I pick the second highest salary
-        second_highest = result_df.iloc[1]
+        second_highest = result_series.iloc[1]
     else:
         # Otherwise, I set the result to None
         second_highest = None
