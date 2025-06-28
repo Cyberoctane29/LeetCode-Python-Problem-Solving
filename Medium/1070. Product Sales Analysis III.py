@@ -31,21 +31,23 @@ def sales_analysis(sales: pd.DataFrame) -> pd.DataFrame:
     # I find the earliest year each product was sold using groupby and min
     temp_df = sales.groupby('product_id', as_index=False).agg(min_year=('year', 'min'))
     
-    # I merge the original sales table with this result to get each product's first year alongside its sales data
+    # I merge the original sales table with this result to bring in the earliest year for each product
     merged_df = pd.merge(sales, temp_df, how='left', on='product_id')
     
     # I filter the merged DataFrame to include only records where the sale year matches the product's first year
-    result_df = merged_df.loc[merged_df['year'] == merged_df['min_year'], ]
+    # and rename the 'year' column to 'first_year' immediately after this selection
+    result_df = merged_df.loc[(merged_df['year'] == merged_df['min_year']), ].rename(columns={'year': 'first_year'})
     
-    # I rename the 'year' column to 'first_year' and drop unnecessary columns
-    return result_df.rename(columns={'year': 'first_year'}).drop(columns=['sale_id', 'min_year'])
+    # I drop the 'sale_id' and 'min_year' columns and return the final result
+    return result_df.drop(columns=['sale_id', 'min_year'])
 
 # Intuition:
-# I need to find the first year each product was sold and then select all sale records from that year.
-# Merging the first-year information back with the full sales data allows easy filtering of relevant records.
+# I need to find the first year each product was sold and select all sales records from that specific year.
+# Merging the first-year information back into the sales data allows me to filter out these relevant entries easily.
 
 # Explanation:
-# I start by grouping the Sales table by 'product_id' and use `min()` to find the earliest year each product was sold.
-# I merge this result with the original Sales table to add a 'min_year' column for each product's sales records.
-# I filter the merged DataFrame to keep only those rows where the sale year equals the product's first sale year.
-# Finally, I rename the 'year' column to 'first_year' and remove the 'sale_id' and 'min_year' columns before returning the result.
+# I begin by grouping the Sales table by 'product_id' and use `min()` to get each product's earliest year.
+# I merge this result back with the original Sales data so each sale record now knows its product's first sale year.
+# I filter the merged DataFrame to retain only those records where the sale year matches this first year.
+# Right after filtering, I rename the 'year' column to 'first_year' for clarity.
+# Finally, I drop the unnecessary 'sale_id' and 'min_year' columns before returning the result.
