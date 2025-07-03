@@ -17,32 +17,32 @@
 # weight is the weight of the person in kilograms.
 
 # Problem Statement:
+# There is a queue of people waiting to board a bus. However, the bus has a weight limit of 1000 kilograms, so there may be some people who cannot board.
 # Write a function to find the person_name of the last person that can fit on the bus without exceeding the weight limit.
-# The bus has a weight limit of 1000 kilograms.
 # The test cases are generated such that the first person does not exceed the weight limit.
-# Only one person can board the bus at any given turn.
+# Note that only one person can board the bus at any given turn.
 
 # Solution
 
 import pandas as pd
 
 def last_passenger(queue: pd.DataFrame) -> pd.DataFrame:
-    # I sort the queue based on 'turn' to maintain boarding order
+    # I sort the queue by 'turn' to ensure people board in the correct order
     queue = queue.sort_values(by='turn', ascending=True)
     
-    # I compute the cumulative sum of weights as people board
+    # I calculate a running total of the cumulative weight as each person boards
     queue['total_weight'] = queue['weight'].cumsum()
     
-    # I select people who can fit without exceeding 1000 kg, and pick the last one’s 'person_name'
-    return queue.loc[queue['total_weight'] <= 1000, ['person_name']].iloc[[-1]]
+    # I filter the queue to include only those whose cumulative weight does not exceed 1000
+    # Then, I select the last person's name who can board and return it
+    return queue.loc[queue['total_weight'] <= 1000, ['person_name']].tail(1)
 
 # Intuition:
-# I need to track the running total of weights as people board in turn order.
-# The last person whose boarding keeps the total within 1000 kg is the answer.
+# I need to track the total weight on the bus as people board in turn order.
+# By maintaining a cumulative sum and stopping before it exceeds 1000, I can identify the last person who fits.
 
 # Explanation:
-# I first sort the queue by 'turn' to ensure people board in order.
-# I then calculate the cumulative sum of weights as each person boards.
-# I filter to keep only those whose cumulative weight doesn’t exceed 1000 kg.
-# From this filtered list, I use `.iloc[[-1]]` to retrieve the last person to board within the limit.
-# I return this result containing only the 'person_name' column.
+# I start by sorting the DataFrame by 'turn' so people board in order.
+# I compute the cumulative sum of 'weight' using `cumsum()`.
+# I then filter the records where the cumulative total does not exceed 1000.
+# Finally, I pick the last entry from this filtered DataFrame using `.tail(1)` to get the name of the last person who can board.
