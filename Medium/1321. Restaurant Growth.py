@@ -17,7 +17,7 @@
 
 # Problem Statement:
 # You are the restaurant owner and you want to analyze a possible expansion (there will be at least one customer every day).
-# Compute the moving average of how much the customer paid in a seven days window (i.e., current day + 6 days before). 
+# Compute the moving average of how much the customer paid in a seven days window (i.e., current day + 6 days before).
 # average_amount should be rounded to two decimal places.
 # Return the result table ordered by visited_on in ascending order.
 
@@ -26,28 +26,31 @@
 import pandas as pd
 
 def restaurant_growth(customer: pd.DataFrame) -> pd.DataFrame:
-    # I first group the customer table by 'visited_on' and sum the 'amount' for each day
+    # I group the customer table by 'visited_on' and sum the 'amount' for each day
     temp_df = customer.groupby('visited_on', as_index=False)['amount'].sum()
     
     # I create a copy of this aggregated DataFrame for further calculations
-    result_df = temp_df.copy()
+    result_df = temp_df
     
     # I define a rolling window of 7 days over the 'amount' column
     roll = temp_df['amount'].rolling(window=7)
     
-    # I calculate the total amount and average amount over the 7-day window
+    # I compute the rolling sum and assign it to the 'amount' column
     result_df['amount'] = roll.sum()
+    
+    # I compute the rolling mean, round it to 2 decimal places, and assign it to 'average_amount'
     result_df['average_amount'] = round(roll.mean(), 2)
     
-    # I return the result, filtering out rows where the moving average is not available (i.e., first 6 records)
-    return result_df.loc[result_df['average_amount'].notna(),]
+    # I return the final result excluding rows with NaN average values (i.e., the first 6 days)
+    return result_df.loc[result_df['average_amount'].notna(), ]
 
 # Intuition:
-# I need to compute a 7-day moving average of daily total amounts.
-# By grouping and summing daily totals, then applying a rolling window, I can track revenue trends.
+# I need to calculate the total and average amount paid by customers in a moving window of 7 consecutive days.
+# Using `rolling` on the summed daily amounts allows me to efficiently compute these metrics.
 
 # Explanation:
-# I start by grouping the data by 'visited_on' to get daily total amounts.
-# I then use `rolling(window=7)` on the 'amount' column to calculate a moving sum and mean.
-# The moving average is rounded to 2 decimal places.
-# Finally, I filter out rows where the rolling average is not yet available (less than 7 records) before returning the result.
+# I first aggregate the daily total amounts by grouping the data on 'visited_on' and summing 'amount'.
+# I then create a rolling window of 7 days over the 'amount' column.
+# Using `sum()` and `mean()`, I calculate the total and average amounts for each 7-day window.
+# I round the averages to two decimal places.
+# Finally, I filter out the rows where the rolling average is NaN (which occurs for the initial 6 days before a full window is available).
