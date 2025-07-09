@@ -9,38 +9,46 @@
 # | dna_sequence   | varchar |
 # | species        | varchar |
 # +----------------+---------+
-# sample_id is the unique key for this table.
+# sample_id is the unique key.
 
 # Problem Statement:
-# Write a function to identify sample_id for sequences that:
-# - Start with 'ATG'
-# - End with one of 'TAA', 'TAG', 'TGA'
-# - Contain 'ATAT'
-# - Have at least 3 consecutive 'G'
-
-# Return the result table ordered by sample_id ascending.
+# Write a function to identify DNA sequences having:
+# - A start codon: sequences starting with 'ATG'
+# - A stop codon: sequences ending with 'TAA', 'TAG', or 'TGA'
+# - The motif 'ATAT' present anywhere
+# - At least three consecutive G's ('GGG')
+# Return the result ordered by sample_id ascending.
 
 # Solution 1
 
 import pandas as pd
 
 def analyze_dna_patterns(samples: pd.DataFrame) -> pd.DataFrame:
-    # I create a new column for each pattern, checking the condition and converting boolean to int (0/1)
+    # I check if sequence starts with 'ATG' → has_start
     samples['has_start'] = samples['dna_sequence'].str.startswith('ATG').astype(int)
-    samples['has_stop']  = samples['dna_sequence'].str.endswith(('TAA', 'TAG', 'TGA')).astype(int)
-    samples['has_atat']  = samples['dna_sequence'].str.contains('ATAT').astype(int)
-    samples['has_ggg']   = samples['dna_sequence'].str.contains('GGG').astype(int)
 
-    # I return the result sorted by sample_id
+    # I check if sequence ends with any of the stop codons → has_stop
+    samples['has_stop'] = samples['dna_sequence'].str.endswith(('TAA', 'TAG', 'TGA')).astype(int)
+
+    # I check if 'ATAT' exists in sequence → has_atat
+    samples['has_atat'] = samples['dna_sequence'].str.contains('ATAT').astype(int)
+
+    # I check if 'GGG' exists in sequence → has_ggg
+    samples['has_ggg'] = samples['dna_sequence'].str.contains('GGG').astype(int)
+
+    # I return result ordered by sample_id
     return samples.sort_values('sample_id')
 
 # Intuition:
-# I need to detect specific string patterns in DNA sequences for each sample and mark them as 1 (present) or 0 (absent).
+# I need to check for specific string patterns within each DNA sequence and flag them with 1 if present, else 0.
 
 # Explanation:
-# I use pandas string methods to check if each sequence starts with 'ATG', ends with one of the stop codons, contains 'ATAT', or contains 'GGG'.
-# I convert these boolean results to integers and add them as new columns.
-# Finally, I sort the table by sample_id and return it.
+# I use string methods to check for:
+# - Whether the sequence starts with 'ATG'
+# - Whether it ends with any stop codon ('TAA', 'TAG', 'TGA')
+# - Whether it contains 'ATAT'
+# - Whether it contains 'GGG'
+# Then, I convert these boolean results to 0/1 integers and return the table sorted by sample_id.
 
 # Solution 2
 
@@ -48,21 +56,21 @@ import pandas as pd
 import numpy as np
 
 def analyze_dna_patterns(samples: pd.DataFrame) -> pd.DataFrame:
-    # I use .assign() with lambda expressions and np.where to generate new columns based on pattern matches
+    # I create new columns using np.where for each pattern check
     result_df = samples.assign(
-        has_start = lambda x: np.where(x['dna_sequence'].str.startswith('ATG'), 1, 0),
-        has_stop  = lambda x: np.where(x['dna_sequence'].str.endswith(('TAA', 'TAG', 'TGA')), 1, 0),
-        has_atat  = lambda x: np.where(x['dna_sequence'].str.contains('ATAT'), 1, 0),
-        has_ggg   = lambda x: np.where(x['dna_sequence'].str.contains('GGG'), 1, 0)
-    ).sort_values(by='sample_id')
+        has_start = np.where(samples['dna_sequence'].str.startswith('ATG'), 1, 0),
+        has_stop  = np.where(samples['dna_sequence'].str.endswith(('TAA', 'TAG', 'TGA')), 1, 0),
+        has_atat  = np.where(samples['dna_sequence'].str.contains('ATAT'), 1, 0),
+        has_ggg   = np.where(samples['dna_sequence'].str.contains('GGG'), 1, 0)
+    )
 
-    # I return the final result
-    return result_df
+    # I return result ordered by sample_id
+    return result_df.sort_values('sample_id')
 
 # Intuition:
-# Similar goal as Solution 1 — detect DNA sequence patterns and label them with 1 or 0, but using .assign() and np.where for a cleaner, one-shot approach.
+# Same as Solution 1 — but I directly assign the 0/1 values using np.where within an assign() call.
 
 # Explanation:
-# I use the .assign() method combined with lambda functions and np.where to add new columns indicating the presence of each pattern.
-# Each lambda checks the pattern in the dna_sequence and assigns 1 if present, 0 if not.
-# I then sort by sample_id and return the final DataFrame.
+# I use np.where to check each pattern and assign 1 if true, else 0 for each new column.
+# I use str.startswith(), str.endswith(), and str.contains() for pattern checks.
+# Then, I return the final table ordered by sample_id.
