@@ -25,7 +25,7 @@ def human_traffic(stadium: pd.DataFrame) -> pd.DataFrame:
     # I filter only the rows where people >= 100, sort by 'id', and reset index
     temp_df = stadium[stadium['people'] >= 100].sort_values(by='id').reset_index(drop=True)
     if temp_df.empty:
-        return pd.DataFrame(columns=stadium.columns)
+                return temp_df
 
     result = []
     current_seq = [temp_df.loc[0, 'id']]  # I initialize the sequence with the first valid ID
@@ -62,7 +62,7 @@ import pandas as pd
 
 def human_traffic(stadium: pd.DataFrame) -> pd.DataFrame:
     # I filter rows where people >= 100 and sort by 'id'
-    stadium = stadium.sort_values('id').query('people >= 100')
+    stadium = stadium.query('people >= 100').sort_values('id')
     
     # I create a grouping key using index difference trick: id - index
     stadium['id_exp_diff'] = stadium['id'] - range(len(stadium))
