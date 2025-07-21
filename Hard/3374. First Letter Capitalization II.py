@@ -26,7 +26,7 @@ def capitalize_content(user_content: pd.DataFrame) -> pd.DataFrame:
     # I capitalize each word while handling hyphenated words separately
     user_content['converted_text'] = user_content['content_text'].apply(
         lambda x: ' '.join(
-            ['-'.join([part.capitalize() for part in word.split('-')]) for word in x.split()]
+            ['-'.join([part.capitalize() for part in word.split('-')]) for word in x.split(' ')]
         )
     )
     # I rename the original column for clarity
